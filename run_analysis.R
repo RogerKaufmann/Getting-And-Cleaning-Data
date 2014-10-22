@@ -5,10 +5,14 @@
 #################
 # Configuration #
 #################
-kBasePath = "data"
+# name of the top data folder in the working directory
+kDataPath = "data"
+# Remove "train" if you only want "test" set and vice versa
 kFolders <- c("train", "test")
+# kVariables is for input checks only, does not affect selected columns
 kVariables <- c("subject", "y", "X")
-
+# Name of the output file
+kOutputFile <- "tidy_data.txt"
 
 ReadMetadata <- function(filter.features) {
     # Reads the two metadata files for features and activities
@@ -30,7 +34,7 @@ GetFeatureMetadata <- function(FILTER_FUN) {
     # Returns:
     #   Dataframe with feature metadata filtered by the FILTER_FUN function
     #   consisting of three columns "ID", "Feature" and "Use"
-    features <- read.table(file.path(kBasePath , "features.txt"), col.names = c("ID", "Feature"), colClasses = c("numeric", "character"), header=FALSE)
+    features <- read.table(file.path(kDataPath , "features.txt"), col.names = c("ID", "Feature"), colClasses = c("numeric", "character"), header=FALSE)
     features[, "Use"] <- FILTER_FUN(features$Feature)
     features
 }
@@ -40,7 +44,7 @@ GetActivityMetadata <- function() {
     #
     # Returns:
     #   Dataframe with activity metadata  
-    activities <- read.table(file.path(kBasePath , "activity_labels.txt"), col.names = c("ID", "Label"), colClasses = c("numeric", "character"), header=FALSE)
+    activities <- read.table(file.path(kDataPath , "activity_labels.txt"), col.names = c("ID", "Label"), colClasses = c("numeric", "character"), header=FALSE)
     activities
 }
 
@@ -52,17 +56,7 @@ FilterForMeanAndStd <- function(stringVector) {
     grepl("mean\\(\\)|std\\(\\)", stringVector)
 }
 
-AppendData <- function(sibling, base=NULL, bindfunc=rbind) {
-    # Little helper for binding dataframes together.
-    if (is.null(base)) {
-        base <- sibling
-    } else {
-        base <- bindfunc(base, sibling)
-    }
-    base
-}
-
-GenFilepath <- function(item, folder=NULL, base="data") {
+GenFilepath <- function(item, folder=NULL) {
     # Generates a filepath to an item (either "subject", "y" or "X") in a given folder
     #
     # Returns:
@@ -74,8 +68,7 @@ GenFilepath <- function(item, folder=NULL, base="data") {
     
     if (!folder %in% kFolders) stop("Invalid 'folder' value")
     if (!item %in% kVariables) stop("Invalid 'item' value")
-    filepath <- file.path(file.path(base, folder), paste(item, paste(folder, "txt", sep="."), sep="_"))
-    
+    filepath <- file.path(file.path(kDataPath, folder), paste(item, paste(folder, "txt", sep="."), sep="_"))
     if (!file.exists(filepath)) stop(paste("Critical Error. File does not exist:", filepath))
     filepath
     
@@ -104,22 +97,29 @@ CombineByVariable <- function(variable, colNames, filter=c(TRUE)) {
         data.part <- NULL
     }
     # Set variable names after cleaning them up
-    for (name in colNames) {
-        
-    }
     names(data.all) <- CleanColNames(colNames)
     data.all
 }
 
+AppendData <- function(sibling, base=NULL, bindfunc=rbind) {
+    # Little helper for binding dataframes together.
+    if (is.null(base)) {
+        base <- sibling
+    } else {
+        base <- bindfunc(base, sibling)
+    }
+    base
+}
+
 CreateDatasetByVariables <- function(metadata) {
-    # Create the Dataset by variable, that means
+    # Create the Dataset by variable
+    # Sets the factor variables in activities and the column names in each step
     # 1) Read Metadata
     # 2) Read all the rows for subject in both test and training sets
     # 3) Read all the rows for the activities in both test and training sets
     # 4) Read all the rows for the features in both test and training set
     #    and applies a filter for only selecting a subset of columns
     # 5) Combine test and training Dataset
-    # 6) Sets the factor variables in activities and the column names    
     md.features <- metadata$features
     md.activities <- metadata$activities
     print ("Reading Subjects...")
@@ -146,4 +146,8 @@ run_analysis <- function() {
     # Impuls for this solution stems from 
     # http://stackoverflow.com/questions/21644848/summarizing-multiple-columns-with-dplyr
     dataset.averaged <- summarise_each(dataset.grouped, funs(mean))
+    print (paste("Writing Dataset to", kOutputFile))
+    write.table(dataset.averaged, kOutputFile, row.names=FALSE)
+    print ("Done.")
+    dataset.averaged
 }
