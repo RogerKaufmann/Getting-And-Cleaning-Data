@@ -10,7 +10,7 @@ This data set contains the data from experiments that have been carried out with
 For more details see `Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012`
 
 ## The script
-The script (run_analysis.R) creates a tidy dataset from the "Human Activity Recognition Using Sartphones Data Set". The raw data has to be placed in a subfolder defined by the configuration setting `kDataPath` in the working directory.
+The script (run_analysis.R) creates a tidy dataset from the "Human Activity Recognition Using Sartphones Data Set". The raw data has to be placed in a subfolder in the working directory as defined by the configuration setting `kDataPath`.
 
 It does the following steps:
 
