@@ -16,7 +16,7 @@ It does the following steps:
 2. Reads all the rows for subjects, activities and features in the defined sets ("test", "train" or both). See "Configuration" below.
 	1. For all variables: Appropriately labels the data set with descriptive variable names. 
 	2. For the activity rows: Uses descriptive activity names to name the activities in the data set.
-	3.For the feature rows: Extracts only the measurements on the mean and standard deviation for each measurement. See "Feature selection" below for my interpretation.
+	3. For the feature rows: Extracts only the measurements on the mean and standard deviation for each measurement. See "Feature selection" below for my interpretation.
 3. Merges the training and the test sets to create one data set.
 4. From the data set in step 3, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 

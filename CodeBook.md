@@ -32,7 +32,7 @@ In my opinion, underscore `_` is a useful character to improve readability of co
 
 ### Features
 
-The following features have been averaged for each activity and each subject.
+The following 66 features have been averaged for each activity and each subject.
 
 * `time_bodyacc_mean_x`
 * `time_bodyacc_mean_y`
