@@ -4,12 +4,14 @@
 ## The raw data
 The raw data stem from the "Human Activity Recognition Using Smartphones Dataset" (see http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
 This data set contains the data from experiments that have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. The data stems from the phones embedded accelerometer and gyroscope.
-For more details see Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+
+For more details see `Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012`
 
 ## The script
 The script (run_analysis.R) creates a tidy dataset from the "Human Activity Recognition Using Sartphones Data Set"
 
 It does the following steps:
+
 1. Reads the Metadata for the activities and the features
 2. Reads all the rows for subjects, activities and features in the defined sets ("test", "train" or both). See "Configuration" below.
 ..* For all variables: Appropriately labels the data set with descriptive variable names. 
