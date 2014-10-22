@@ -36,7 +36,10 @@ GetFeatureMetadata <- function(FILTER_FUN) {
     # Returns:
     #   Dataframe with feature metadata filtered by the FILTER_FUN function
     #   consisting of three columns "ID", "Feature" and "Use"
-    features <- read.table(file.path(kDataPath , "features.txt"), col.names = c("ID", "Feature"), colClasses = c("numeric", "character"), header=FALSE)
+    features <- read.table(file.path(kDataPath , "features.txt"), 
+                           col.names = c("ID", "Feature"), 
+                           colClasses = c("numeric", "character"), 
+                           header=FALSE)
     features[, "Use"] <- FILTER_FUN(features$Feature)
     features
 }
@@ -46,7 +49,10 @@ GetActivityMetadata <- function() {
     #
     # Returns:
     #   Dataframe with activity metadata  
-    activities <- read.table(file.path(kDataPath , "activity_labels.txt"), col.names = c("ID", "Label"), colClasses = c("numeric", "character"), header=FALSE)
+    activities <- read.table(file.path(kDataPath , "activity_labels.txt"), 
+                             col.names = c("ID", "Label"), 
+                             colClasses = c("numeric", "character"), 
+                             header=FALSE)
     activities
 }
 
@@ -135,9 +141,13 @@ CreateDatasetByVariables <- function(metadata) {
     print ("Reading Activities...")
     rawdata.activities <- CombineByVariable("y", c("activity"))
     # Create Rawdata for the Activities using factor variables
-    rawdata.activities$activity <- factor(rawdata.activities$activity, levels=md.activities$ID, labels=md.activities$Label)
+    rawdata.activities$activity <- factor(rawdata.activities$activity, 
+                                          levels=md.activities$ID, 
+                                          labels=md.activities$Label)
     print ("Reading Features...")
-    rawdata.features <- CombineByVariable("X", colNames=md.features$Feature[md.features$Use], filter=md.features$Use)
+    rawdata.features <- CombineByVariable("X", 
+                                          colNames=md.features$Feature[md.features$Use], 
+                                          filter=md.features$Use)
     print ("Combining Dataset...")
     rawdata.all <- cbind(cbind(rawdata.subject, rawdata.activities), rawdata.features)
 
