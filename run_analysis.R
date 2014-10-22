@@ -9,10 +9,12 @@
 kDataPath = "data"
 # Remove "train" if you only want "test" set and vice versa
 kFolders <- c("train", "test")
-# kVariables is for input checks only, does not affect selected columns
-kVariables <- c("subject", "y", "X")
 # Name of the output file
 kOutputFile <- "tidy_data.txt"
+
+
+# kVariables is for input checks only, does not affect selected columns
+kVariables <- c("subject", "y", "X")
 
 ReadMetadata <- function(filter.features) {
     # Reads the two metadata files for features and activities
