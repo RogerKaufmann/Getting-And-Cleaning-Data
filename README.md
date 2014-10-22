@@ -1,6 +1,8 @@
 ##### Getting and Cleaning Data
 # Course Project
 
+This file describes the procedure followed to produce a tidy data set as required by the course project for "Getting and Cleaning Data".
+
 ## The raw data
 The raw data stem from the "Human Activity Recognition Using Smartphones Dataset" (see http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
 This data set contains the data from experiments that have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. The data stems from the phones embedded accelerometer and gyroscope.
@@ -8,11 +10,11 @@ This data set contains the data from experiments that have been carried out with
 For more details see `Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012`
 
 ## The script
-The script (run_analysis.R) creates a tidy dataset from the "Human Activity Recognition Using Sartphones Data Set"
+The script (run_analysis.R) creates a tidy dataset from the "Human Activity Recognition Using Sartphones Data Set". The raw data has to be placed in a subfolder defined by the configuration setting `kDataPath` in the working directory.
 
 It does the following steps:
 
-1. Reads the Metadata for the activities and the features
+1. Reads the metadata for the activities and the features
 2. Reads all the rows for subjects, activities and features in the defined sets ("test", "train" or both). See "Configuration" below.
 	1. For all variables: Appropriately labels the data set with descriptive variable names. 
 	2. For the activity rows: Uses descriptive activity names to name the activities in the data set.
@@ -38,12 +40,23 @@ I took this literally by only extracting measurements for
 * mean(): Mean value
 * std(): Standard deviation
 
-I implemented this via a filter function that returns a logical vector with TRUE if a feature has "mean()" or "std()" in its name, FALSE otherwise:
+I implemented this via a default filter function that returns a logical vector with TRUE if a feature has "mean()" or "std()" in its name, FALSE otherwise:
 `grepl("mean\\(\\)|std\\(\\)", stringVector)`
 
-The function `ReadMetadata` requires such a filter function as an argument for defining which columns should be extracted from the feature vector. 
+Please consult the codebook for more detailed information on variables. 
+
+## Main functions
+
+See the commented code for more information about arguments and return values. I tried to follow the Google's R Style Guide.
+
+* `ReadMetadata` Reads the two metadata files for features and activities. Requires a filter function as an argument for defining which columns should be extracted from the feature vector. 
+* `FilterForMeanAndStd` Filter function for mean() and std() strings
+* `CleanColNames` Cleans up a vector of column names
+* `CreateDatasetByVariables` Creates the Dataset by looping through the variable files
+* `RunAnalysis` Runs the Analysis and saves the tidy dataset with the average of each variable for each activity and each subject
 
 ## Useful resources
 The following resources helped me during this course project
 * David's Course Project FAQ https://class.coursera.org/getdata-008/forum/thread?thread_id=24
 * Solution for Summarizing the columns http://stackoverflow.com/questions/21644848/summarizing-multiple-columns-with-dplyr
+* Google's R Style Guide https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml

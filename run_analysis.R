@@ -114,7 +114,7 @@ AppendData <- function(sibling, base=NULL, bindfunc=rbind) {
 }
 
 CreateDatasetByVariables <- function(metadata) {
-    # Create the Dataset by variable
+    # Creates the Dataset by looping through the variable files
     # Sets the factor variables in activities and the column names in each step
     # 1) Read Metadata
     # 2) Read all the rows for subject in both test and training sets
@@ -122,6 +122,12 @@ CreateDatasetByVariables <- function(metadata) {
     # 4) Read all the rows for the features in both test and training set
     #    and applies a filter for only selecting a subset of columns
     # 5) Combine test and training Dataset
+    #
+    # Args:
+    #   A list containing two dataframes for features and activities metadata
+    #
+    # Returns:
+    #   The combined dataset in a dataframe
     md.features <- metadata$features
     md.activities <- metadata$activities
     print ("Reading Subjects...")
@@ -137,8 +143,9 @@ CreateDatasetByVariables <- function(metadata) {
 
 }
 
-run_analysis <- function() {
-    # Run the Analysis and save the tidy dataset
+RunAnalysis <- function() {
+    # Runs the Analysis and saves the tidy dataset with the average of 
+    # each variable for each activity and each subject
     library(dplyr)
     metadata <- ReadMetadata(FilterForMeanAndStd)  # Apply filter for features
     # Combine Test and Training Set and set the variables
