@@ -21,8 +21,8 @@ In my opinion, underscore `_` is a useful character to improve readability of co
 ## Selected variables
 
 ### Subjects and activities
-* `subject` - The unique ID for the participant. Ranges from 1 to 30
-* `activity` - The label of the activity performed. Ranges from 1 to 6
+* `subject` - The unique ID for the participant. Integer that ranges from 1 to 30
+* `activity` - The label of the activity performed. Factor variable that ranges from 1 to 6
 	* `WALKING` = `1`
 	* `WALKING_UPSTAIRS` = `2`
 	* `WALKING_DOWNSTAIRS` = `3`
