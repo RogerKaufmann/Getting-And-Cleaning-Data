@@ -11,25 +11,24 @@ For more detail see 'features_info.txt' in the original data set.
 The variable names from the raw data are cleaned up as follows
 
 1. all variable names are converted to lower character
-2. Brackets '()' are removed and hyphen '-' is replaced with underscore '_'
+2. Brackets `()` are removed and hyphen `-` is replaced with underscore `_`
 3. If 't' is the first letter, it is replaced with 'time_'
 4. If 'f' is the first letter, it is replaced with 'freq_'
 
-For example, `tBodyAcc-mean()-X` becomes `time_bodyacc_mean_x'
-In my opinion, underscore '_' is a useful character to improve readability of column names.
+For example, `tBodyAcc-mean()-X` becomes `time_bodyacc_mean_x`.
+In my opinion, underscore `_` is a useful character to improve readability of column names.
 
-## Variables
+## Selected variables
 
 ### Subjects and activities
 * `subject` - The unique ID for the participant. Ranges from 1 to 30
 * `activity` - The label of the activity performed. Ranges from 1 to 6
-
-..* `WALKING` = `1`
-..* `WALKING_UPSTAIRS` = `2`
-..* `WALKING_DOWNSTAIRS` = `3`
-..* `SITTING` = `4`
-..* `STANDING` = `5`
-..* `LAYING` = `6`
+	* `WALKING` = `1`
+	* `WALKING_UPSTAIRS` = `2`
+	* `WALKING_DOWNSTAIRS` = `3`
+	* `SITTING` = `4`
+	* `STANDING` = `5`
+	* `LAYING` = `6`
 
 ### Features
 
