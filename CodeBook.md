@@ -34,6 +34,7 @@ In my opinion, underscore `_` is a useful character to improve readability of co
 
 The following 66 features have been averaged for each activity and each subject. 
 There are at most 4 elements in the variable names:
+
 1. `time` indicates time domain signals; `freq` indicates frequency domain signals
 2. Signal abbreviations were not replaced. `acc` stands for acceleration signal
 3. `mean` stands for "Mean value", `std` stands for "Standard deviation"
